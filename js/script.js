@@ -10,7 +10,7 @@
 const divCountEl = document.getElementById("countdown");
 const numberListEl = document.getElementById("numbers-list");
 const formEl = document.getElementById("answers-form");
-const inputEl = document.querySelector("input");
+const inputEl = document.querySelectorAll("input");
 
 let numbers = [];
 let listItems = "";
@@ -43,3 +43,36 @@ function generateRandomNumber() {
 }
 
 generateRandomNumber();
+
+formEl.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  let userInput = [];
+
+  for (let i = 0; i < inputEl.length; i++) {
+    userInput.push(parseInt(inputEl[i].value));
+  }
+
+  let correctNumbers = [];
+  let wrongNumbers = [];
+
+  for (let i = 0; i < userInput.length; i++) {
+    if (numbers.includes(userInput[i])) {
+      correctNumbers.push(userInput[i]);
+    } else {
+      wrongNumbers.push(userInput[i]);
+    }
+  }
+
+  if (correctNumbers.length > 0) {
+    alert(`Hai indovinato i seguenti numeri: ${correctNumbers.join(", ")}`);
+  } else {
+    alert("Non hai indovinato nessun numero!");
+  }
+
+  console.log(
+    `Hai indovinato ${correctNumbers.length} numeri: ${correctNumbers.join(
+      ", "
+    )}`
+  );
+});
