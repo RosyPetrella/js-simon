@@ -10,6 +10,7 @@
 const divCountEl = document.getElementById("countdown");
 const numberListEl = document.getElementById("numbers-list");
 const formEl = document.getElementById("answers-form");
+const inputEl = document.querySelector("input");
 
 let numbers = [];
 let listItems = "";
@@ -19,7 +20,7 @@ let timer = 30;
 function generateRandomNumber() {
   numbers = [];
   for (let i = 0; i < 5; i++) {
-    const thisNumber = Math.round(Math.random() * 100) + 1;
+    const thisNumber = Math.round(Math.random() * 50) + 1;
     numbers.push(thisNumber);
     listItems += `<li>${thisNumber}</li>`;
   }
@@ -36,6 +37,7 @@ function generateRandomNumber() {
     if (timer === 0) {
       clearInterval(intervalID);
       numberListEl.classList.add("d-none");
+      formEl.classList.remove("d-none");
     }
   }, 1000);
 }
