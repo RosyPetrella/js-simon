@@ -7,11 +7,13 @@
 // NOTA:
 // non è importante l'ordine con cui l'utente inserisce i numeri, basta che ne indovini il più possibile.
 
+const divCountEl = document.getElementById("countdown");
 const numberListEl = document.getElementById("numbers-list");
 const formEl = document.getElementById("answers-form");
 
 let numbers = [];
 let listItems = "";
+let timer = 30;
 
 // Generazione di 5 numeri casuali
 function generateRandomNumber() {
@@ -22,11 +24,20 @@ function generateRandomNumber() {
     listItems += `<li>${thisNumber}</li>`;
   }
   console.log(numbers);
+
+  // Aggiunta dei numeri generati alla lista in pagina
   numberListEl.innerHTML = `<ul>${listItems}</ul>`;
+
+  //Aggiunta countdown
+  const intervalID = setInterval(function () {
+    timer--;
+    divCountEl.innerText = timer;
+
+    if (timer === 0) {
+      clearInterval(intervalID);
+      numberListEl.classList.add("d-none");
+    }
+  }, 1000);
 }
 
 generateRandomNumber();
-
-setTimeout(function () {
-  console.log("hi");
-}, 2000);
